@@ -7,7 +7,11 @@ import siw.model.User;
 
 public interface OrderDAO {
 
+<<<<<<< HEAD
     public Integer create(Order modelObject);
+=======
+    public void create(Order modelObject);
+>>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
 
     public void delete(Order o);
 

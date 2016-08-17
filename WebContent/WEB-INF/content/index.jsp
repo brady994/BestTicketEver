@@ -141,7 +141,11 @@
                       <dd>"${topEvent.location}"</dd>
                       </dl>
                         <div class=" text-center">
+<<<<<<< HEAD
                             <a href="home?action=singleevent&id=5" role="button" class=" btn btn-default text-center"> Tickets</a>
+=======
+                            <a href="home?action=singleevent" role="button" class=" btn btn-default text-center"> Tickets</a>
+>>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
                         </div>
                     </div>
                     <!--end face back-->

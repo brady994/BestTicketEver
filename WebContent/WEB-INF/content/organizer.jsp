@@ -1,5 +1,6 @@
 
     <div class="container">
+<<<<<<< HEAD
       <div tabindex="-1" id="login-auto-close-alert" class="alert hidden">
           <p id="login-alert-text"></p>
       </div>
@@ -44,6 +45,49 @@
                             </th>
                         </tr>
                     </thead>
+=======
+        <div class="panel panel-primary panel-table">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col col-xs-6">
+                        <h1 class="panel-title">Event</h1>
+                    </div>
+                    <div class="col col-xs-6 text-right">
+                        <button type="button" class="btn btn-sm btn-primary btn-create collapsed" data-toggle="collapse" data-target="#form-create-event">
+                            Create New Event <i class="glyphicon glyphicon-menu-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body table-responsive">
+                <table class="table table-striped table-bordered table-list " id="table-organizer">
+                
+                    <thead>
+                        <tr>
+                            <th>
+                                <em class="fa fa-cog"></em>
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Location
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                            <th>
+                                Image
+                            </th>
+                        </tr>
+                    </thead>           
+>>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
                     <tbody>
                     <c:forEach items="${events }" value="ev">
                         <tr>

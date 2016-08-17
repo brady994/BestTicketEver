@@ -8,7 +8,11 @@ import siw.model.User;
 
 public interface ReviewDAO 
 {
+<<<<<<< HEAD
 	public Integer create(Review modelObject);
+=======
+	public void create(Review modelObject);
+>>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
 	
 	public void delete(Review r);
 	

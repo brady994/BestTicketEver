@@ -13,6 +13,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import siw.model.Event;
 import siw.model.EventCategory;
+<<<<<<< HEAD
 import siw.model.Guest;
 import siw.model.User;
 import siw.persistence.DAOUtility;
@@ -93,6 +94,54 @@ public class EventDaoJDBC implements EventDAO {
 	    DAOUtility.close(result);
 	}
 	return event;
+=======
+import siw.model.User;
+import siw.persistence.DAOUtility;
+import siw.persistence.dao.EventDAO;
+
+public class EventDaoJDBC implements EventDAO {
+    HikariDataSource datasource;
+
+    public EventDaoJDBC(HikariDataSource datasource) {
+	this.datasource = datasource;
+    }
+
+    @Override
+    public boolean create(Event modelObject) {
+	Connection connection = null;
+	String query = null;
+	PreparedStatement statement = null;
+	try {
+	    connection = datasource.getConnection();
+	    query = "insert into Event(Name,Location,Date,Description,Suspended,Category_id,Organizer_id,Image) values(?,?,?,?,?,?,?,?)";
+	    statement = connection.prepareStatement(query);
+	    statement.setString(1, modelObject.getName());
+	    statement.setString(2, modelObject.getLocation());
+	    long time = modelObject.getDate().getTime();
+	    statement.setDate(3, new java.sql.Date(time));
+	    statement.setString(4, modelObject.getDescription());
+	    statement.setBoolean(5, modelObject.getSuspended());
+	    statement.setInt(6, modelObject.getCategory().getId());
+	    statement.setInt(7, modelObject.getOrganizer().getId());
+	    statement.setString(8, modelObject.getImage());
+	    return (statement.executeUpdate() > 0) ? true : false;
+
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    DAOUtility.close(connection);
+	    DAOUtility.close(statement);
+	}
+	return false;
+
+    }
+
+    @Override
+    public Event findById(Integer id) {
+	// TODO Auto-generated method stub
+	return null;
+>>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
     }
 
     @Override

@@ -72,7 +72,11 @@
 			<button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
 		</div>
 		<div class="login-register">
+<<<<<<< HEAD
 			<a class="dropdown-toggle" href="login" role="button" data-toggle="dropdown">Login</a>
+=======
+			<a href="index.php">Login</a>
+>>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
 		</div>
 	</form>
 </div>
