@@ -2,12 +2,16 @@ package siw.persistence.dao.implementation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import siw.model.AnchestorEventCategory;
 import siw.model.Event;
+import siw.model.EventCategory;
 import siw.model.Organizer;
 import siw.persistence.DAOUtility;
 import siw.persistence.dao.OrganizerDAO;
@@ -15,6 +19,10 @@ import siw.persistence.dao.OrganizerDAO;
 public class OrganizerDAOJDBC implements OrganizerDAO
 {
 	HikariDataSource dataSource;
+
+	public OrganizerDAOJDBC(HikariDataSource datasource) {
+		this.dataSource = datasource;
+	}
 
 	@Override
 	public void create(Organizer modelObject) {
@@ -37,7 +45,6 @@ public class OrganizerDAOJDBC implements OrganizerDAO
 			    statement.executeUpdate();
 			    
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally
@@ -95,7 +102,6 @@ public class OrganizerDAOJDBC implements OrganizerDAO
 		    statement.executeUpdate();
 
 		} catch (SQLException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		} finally {
 		    DAOUtility.close(connection);
@@ -104,16 +110,50 @@ public class OrganizerDAOJDBC implements OrganizerDAO
 		
 	}
 
-	@Override
-	public Map<Integer, Organizer> setEvents(Event e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public Map<Integer, Organizer> getEvents(Event e) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<Integer, Event> getEvents(Organizer o) {
+		Map<Integer,Event> events = new HashMap<Integer, Event>();
+		Connection connection = null;
+		PreparedStatement statement= null;
+		ResultSet result= null;
+		String query = "";
+		try {
+			connection = dataSource.getConnection();
+			 query = "Select E.idevent,E.name,E.location,E.date,E.suspended,EC.ideventcategory,EC.name as categoryname,E.image,AC.name as anchestorname,AC.idanchestor ";
+			    query += "FROM event as E ";
+			    query += "INNER JOIN eventcategory as EC ON E.category_id=EC.ideventcategory ";
+			    query += "INNER JOIN anchestorcategory as AC ON AC.idanchestor=EC.anchestorcategory_id ";
+			    query += "WHERE E.organizer_id= ?";
+			    statement = connection.prepareStatement(query);
+			    statement.setInt(1, o.getId());
+			    result= statement.executeQuery();
+			    while(result.next())
+			    {
+			    	Event event = new Event();
+			    	event.setId(result.getInt("idevent"));
+					event.setDate(result.getDate("date"));
+					event.setLocation(result.getString("location"));
+					event.setName(result.getString("name"));
+					event.setImage(result.getString("image"));
+					event.setSuspended(result.getBoolean("suspended"));
+					AnchestorEventCategory anchestorcategory= new AnchestorEventCategory();
+					anchestorcategory.setId(result.getInt("idanchestor"));
+					anchestorcategory.setName(result.getString("anchestorname"));
+					EventCategory category = new EventCategory();
+					category.setId(result.getInt("ideventcategory"));
+					category.setName(result.getString("categoryname"));
+					category.setAnchestor(anchestorcategory);
+					event.setCategory(category);
+					events.put(event.getId(), event);
+					
+			    	
+			    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		o.setEvents(events);
+		return events;
 	}
 
 }

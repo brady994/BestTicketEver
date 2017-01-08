@@ -1,19 +1,18 @@
 package siw.model;
 
 public class TicketCategory {
-    private int id;
+    private int idcategoryt;
     private String name;
 
     public TicketCategory() {
-	// TODO Auto-generated constructor stub
     }
 
     public int getId() {
-	return id;
+	return idcategoryt;
     }
 
     public void setId(int id) {
-	this.id = id;
+	this.idcategoryt = id;
     }
 
     public String getName() {

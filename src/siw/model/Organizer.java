@@ -1,5 +1,6 @@
 package siw.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Organizer extends User {
@@ -7,7 +8,7 @@ public class Organizer extends User {
 
     public Organizer() 
     {
-    	// TODO Auto-generated constructor stub
+    	events=new HashMap<Integer, Event>();
     }
 
     public Map<Integer, Event> getEvents() {

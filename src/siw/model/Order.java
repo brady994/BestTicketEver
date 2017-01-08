@@ -13,7 +13,6 @@ public class Order {
     private Map<Integer, Sell> sells;
 
     public Order() {
-	// TODO Auto-generated constructor stub
     }
 
     public int getId() {

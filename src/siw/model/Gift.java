@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Gift {
 
-<<<<<<< HEAD
     private Integer id;
     private User receiver;
     private User sender;
@@ -13,16 +12,6 @@ public class Gift {
 
     public Gift() {
     	id=0;
-=======
-    private int id;
-    private User receiver;
-    private User sender;
-    private Ticket ticket;
-    private Date date;
-
-    public Gift() {
-	// TODO Auto-generated constructor stub
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
     }
 
     public int getId() {

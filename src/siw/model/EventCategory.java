@@ -1,26 +1,23 @@
 package siw.model;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class EventCategory {
 
-    private int id;
+    private int idcategory;
     private String name;
-    private EventCategory anchestor;
-    private Map<Integer, EventCategory> children;
+    private AnchestorEventCategory anchestor;
 
     public EventCategory() {
 	anchestor = null;
-	children = new HashMap<>();
+
     }
 
     public int getId() {
-	return id;
+	return idcategory;
     }
 
     public void setId(int id) {
-	this.id = id;
+	this.idcategory = id;
     }
 
     public String getName() {
@@ -31,11 +28,11 @@ public class EventCategory {
 	this.name = name;
     }
 
-    public EventCategory getAnchestor() {
+    public AnchestorEventCategory getAnchestor() {
 	return anchestor;
     }
 
-    public void setAnchestor(EventCategory anchestor) {
+    public void setAnchestor(AnchestorEventCategory anchestor) {
 	this.anchestor = anchestor;
     }
 }

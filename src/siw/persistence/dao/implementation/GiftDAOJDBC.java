@@ -125,40 +125,6 @@ public class GiftDAOJDBC  implements GiftDAO{
 		return gifts;
 	}
 
-	@Override
-	public Map<Integer, Gift> findByPrice(Long min, Long max) {
-		return null;
-		
-	}
 
-	@Override
-	public Gift findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<Integer, Gift> findBySender(User s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<Integer, Gift> findByReceiver(User s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<Integer, Gift> findByTicket(Ticket t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<Integer, Gift> findByDate(Date d) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

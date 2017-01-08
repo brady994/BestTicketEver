@@ -9,11 +9,7 @@ public class Review {
     private int feedback;
 
     public Review() {
-<<<<<<< HEAD
 	this.feedback=0;
-=======
-	// TODO Auto-generated constructor stub
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
     }
 
     public int getId() {

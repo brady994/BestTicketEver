@@ -17,17 +17,6 @@ public interface GiftDAO
 	
 	public Map<Integer,Gift> findByName(String name);
 	
-	public Map<Integer,Gift> findByPrice(Long min,Long max);
-	
-	public Gift findById(Long id);
-	
-	public Map<Integer,Gift> findBySender(User s);
-	
-	public Map<Integer,Gift> findByReceiver(User s);
-	
-	public Map<Integer,Gift> findByTicket(Ticket t);
-	
-	public Map<Integer,Gift> findByDate(Date d);
 	
 	
 	

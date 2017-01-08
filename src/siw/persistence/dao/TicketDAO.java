@@ -1,6 +1,5 @@
 package siw.persistence.dao;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -20,45 +19,14 @@ public interface TicketDAO
 	
 	public Map<Integer,Ticket> findByPrice(float price);
 	
-	public Map<Integer,Ticket> findBySector(Long Sector);
-	
-	public Map<Integer,Ticket> findByTicketCategory(TicketCategory tc);
-	
 	public Map<String, ArrayList<Ticket>> findByEvent(Event e);
-	
-	public Map<Integer,Ticket> findByEmpty(boolean empty);
-	
-	public void updateEmpty(boolean e);
 	
 	public Map<Integer,Ticket> findByEventAndCategory(Event idevent,TicketCategory idCategory,Integer maxRow);
 
-=======
-import java.util.Map;
+	public Integer soldTicket(Event e, TicketCategory idCategory);
+	public Map<String, Ticket> findByEvent1(Event e);
 
-import siw.model.Event;
-import siw.model.Ticket;
-import siw.model.TicketCategory;
+	public int updatePriceTicket(Ticket ticket);
 
-public interface TicketDAO 
-{
-	public void create(Ticket modelObject);
-	
-	public void delete(Ticket t);
-	
-	public void update (Ticket t);
-	
-	public Ticket findById(Long id);
-	
-	public Map<Integer,Ticket> findByPrice(float price);
-	
-	public Map<Integer,Ticket> findBySector(Long Sector);
-	
-	public Map<Integer,Ticket> findByTicketCategory(TicketCategory tc);
-	
-	public Map<Integer,Ticket> findByEvent(Event e);
-	
-	public Map<Integer,Ticket> findByEmpty(boolean empty);
-	
-	public void updateEmpty(boolean e);
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
+
 }

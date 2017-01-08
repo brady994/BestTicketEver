@@ -28,10 +28,7 @@ public class User {
 	surname = "";
 	coins = 0L;
 	orders = new HashMap<>();
-<<<<<<< HEAD
 	reviews = new HashMap<>();
-=======
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
 	type = Type.Customer;
 
     }
@@ -133,7 +130,6 @@ public class User {
     }
 
     public Type getType() {
-	// TODO Auto-generated method stub
 	return type;
     }
 

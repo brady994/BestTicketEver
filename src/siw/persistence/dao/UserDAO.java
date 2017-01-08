@@ -1,12 +1,11 @@
 package siw.persistence.dao;
 
+import siw.model.Event;
 import siw.model.User;
 
 public interface UserDAO {
 
     public boolean create(User modelObject);
-
-    public User findWishlist(Integer id);
 
     public User findById(Integer id);
 
@@ -16,26 +15,16 @@ public interface UserDAO {
 
     public User findOrder(Integer id);
 
-<<<<<<< HEAD
     public User findReview(User user);
 
     public User findSells(Integer id);
 
     public User findGift(Integer id);
+    
+    public Integer checkSellTicket(User user, Event event);
 
     public boolean update(User modelObject);
 
     public void delete(User modelObject);
 
-=======
-    public User findReview(Integer id);
-
-    public User findSells(Integer id);
-
-    public User findGift(Integer id);
-
-    public boolean update(User modelObject);
-
-    public void delete(User modelObject);
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
 }

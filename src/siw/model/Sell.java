@@ -12,11 +12,7 @@ public class Sell {
     private Gift gift;
 
     public Sell() {
-<<<<<<< HEAD
     	gift=new Gift();
-=======
-	// TODO Auto-generated constructor stub
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
     }
 
     public int getId() {

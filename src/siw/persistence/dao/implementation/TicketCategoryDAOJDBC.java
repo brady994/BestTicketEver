@@ -13,35 +13,35 @@ import siw.model.TicketCategory;
 import siw.persistence.DAOUtility;
 import siw.persistence.dao.TicketCategoryDAO;
 
-public class TicketCategoryDAOJDBC implements TicketCategoryDAO
-{	HikariDataSource dataSource;
+public class TicketCategoryDAOJDBC implements TicketCategoryDAO {
+	HikariDataSource dataSource;
+
+	public TicketCategoryDAOJDBC(HikariDataSource datasource) {
+		this.dataSource=datasource;
+
+	}
 
 	@Override
-	public void create(TicketCategory modelObject) 
-	{
-		Connection connection=null;
-		String query=null;
-		PreparedStatement statement=null;
-		
-		try 	{
-			connection=dataSource.getConnection();
-			query="insert into TicketCategory(idTicketCategory,Name) values(?,?)";
-			statement=connection.prepareStatement(query);
+	public void create(TicketCategory modelObject) {
+		Connection connection = null;
+		String query = null;
+		PreparedStatement statement = null;
+
+		try {
+			connection = dataSource.getConnection();
+			query = "insert into TicketCategory(idTicketCategory,Name) values(?,?)";
+			statement = connection.prepareStatement(query);
 			statement.setInt(1, modelObject.getId());
 			statement.setString(2, modelObject.getName());
 			statement.executeUpdate();
-			
-		}
-		catch(SQLException e)
-		{
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally
-		{
+		} finally {
 			DAOUtility.close(connection);
 			DAOUtility.close(statement);
 		}
-		
+
 	}
 
 	@Override
@@ -50,23 +50,19 @@ public class TicketCategoryDAOJDBC implements TicketCategoryDAO
 		String query = null;
 		PreparedStatement statement = null;
 		try {
-		    connection = dataSource.getConnection();
-		    query = "Delete From TicketCategory WHERE idTicketCategory = ?";
-		    statement = connection.prepareStatement(query);
-		    statement.setInt(1, tc.getId());
-		    statement.executeUpdate();
+			connection = dataSource.getConnection();
+			query = "Delete From TicketCategory WHERE idTicketCategory = ?";
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, tc.getId());
+			statement.executeUpdate();
 
-		} 
-		catch (SQLException e) 
-		{
-		    e.printStackTrace();
-		} 
-		finally 
-		{
-		    DAOUtility.close(connection);
-		    DAOUtility.close(statement);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DAOUtility.close(connection);
+			DAOUtility.close(statement);
 		}
-		
+
 	}
 
 	@Override
@@ -75,51 +71,49 @@ public class TicketCategoryDAOJDBC implements TicketCategoryDAO
 		String query = null;
 		PreparedStatement statement = null;
 		try {
-		    connection = dataSource.getConnection();
-		    query = "Update TicketCategory SET idTicketCategory=?, Name=?";
-		    statement = connection.prepareStatement(query);
-		    statement.setInt(1, tc.getId());
-		    statement.setString(2, tc.getName());
-		    statement.executeUpdate();
+			connection = dataSource.getConnection();
+			query = "Update TicketCategory SET idTicketCategory=?, Name=?";
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, tc.getId());
+			statement.setString(2, tc.getName());
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
+			e.printStackTrace();
 		} finally {
-		    DAOUtility.close(connection);
-		    DAOUtility.close(statement);
+			DAOUtility.close(connection);
+			DAOUtility.close(statement);
 		}
-		
+
 	}
 
 	@Override
-	public Map<Integer, TicketCategory> findById(Long id) 
-	{
+	public Map<Integer, TicketCategory> findById(Long id) {
 		Map<Integer, TicketCategory> ticketCategorys = new HashMap<>();
 		Connection connection = null;
 		String query = null;
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
-		    connection = dataSource.getConnection();
-		    query = "Select TC.idTicketCategory,TC.Name";
-		    query += "FROM TicketCategory as TC";
-		    query +="INNER JOIN Ticket as T ON T.idTicket = TC.idTicketCategory";
-		    statement = connection.prepareStatement(query);
-		   
-		    result = statement.executeQuery();
-		    while (result.next()) {
-		    TicketCategory ticketCategory = new TicketCategory();
-			ticketCategory.setId(result.getInt("TC.idTicketCategory"));
-			ticketCategorys.put(ticketCategory.getId(), ticketCategory);
-		    }
+			connection = dataSource.getConnection();
+			query = "Select TC.idTicketCategory,TC.Name";
+			query += "FROM TicketCategory as TC";
+			query += "INNER JOIN Ticket as T ON T.idTicket = TC.idTicketCategory";
+			statement = connection.prepareStatement(query);
+
+			result = statement.executeQuery();
+			while (result.next()) {
+				TicketCategory ticketCategory = new TicketCategory();
+				ticketCategory.setId(result.getInt("TC.idTicketCategory"));
+				ticketCategorys.put(ticketCategory.getId(), ticketCategory);
+			}
 		} catch (SQLException e) {
-		    
-		    e.printStackTrace();
+
+			e.printStackTrace();
 		} finally {
-		    DAOUtility.close(connection);
-		    DAOUtility.close(statement);
-		    DAOUtility.close(result);
+			DAOUtility.close(connection);
+			DAOUtility.close(statement);
+			DAOUtility.close(result);
 		}
 		return ticketCategorys;
 	}
@@ -132,29 +126,58 @@ public class TicketCategoryDAOJDBC implements TicketCategoryDAO
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		try {
-		    connection = dataSource.getConnection();
-		    query = "Select TC.idTicketCategory,TC.Name";
-		    query += "FROM TicketCategory as TC";
-		    query += "WHERE TC.Name LIKE ?";
-		    statement = connection.prepareStatement(query);
-		    
-		    result = statement.executeQuery();
-		    while (result.next()) {
-		    TicketCategory ticketCategory = new TicketCategory();
-			ticketCategory.setId(result.getInt("TC.idTicketCategory"));
-			ticketCategory.setName(result.getString("TC.Name"));
-			ticketCategorys.put(ticketCategory.getId(), ticketCategory);
-		    }
+			connection = dataSource.getConnection();
+			query = "Select TC.idTicketCategory,TC.Name";
+			query += "FROM TicketCategory as TC";
+			query += "WHERE TC.Name LIKE ?";
+			statement = connection.prepareStatement(query);
+
+			result = statement.executeQuery();
+			while (result.next()) {
+				TicketCategory ticketCategory = new TicketCategory();
+				ticketCategory.setId(result.getInt("TC.idTicketCategory"));
+				ticketCategory.setName(result.getString("TC.Name"));
+				ticketCategorys.put(ticketCategory.getId(), ticketCategory);
+			}
 		} catch (SQLException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
+			e.printStackTrace();
 		} finally {
-		    DAOUtility.close(connection);
-		    DAOUtility.close(statement);
-		    DAOUtility.close(result);
+			DAOUtility.close(connection);
+			DAOUtility.close(statement);
+			DAOUtility.close(result);
 		}
 		return ticketCategorys;
-		
+
+	}
+
+	@Override
+	public Map<Integer, TicketCategory> showCategory() {
+		Map<Integer, TicketCategory> ticketCategorys = new HashMap<Integer,TicketCategory>();
+		Connection connection = null;
+		String query = null;
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		try {
+			connection = dataSource.getConnection();
+			query = "Select * ";
+			query += "From ticketcategory";
+			statement = connection.prepareStatement(query);
+			result = statement.executeQuery();
+			while (result.next()) {
+				TicketCategory ticketCategory = new TicketCategory();
+				ticketCategory.setId(result.getInt("idTicketCategory"));
+				ticketCategory.setName(result.getString("name"));
+				ticketCategorys.put(ticketCategory.getId(), ticketCategory);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DAOUtility.close(connection);
+			DAOUtility.close(statement);
+			DAOUtility.close(result);
+		}
+		return ticketCategorys;
+
 	}
 
 }

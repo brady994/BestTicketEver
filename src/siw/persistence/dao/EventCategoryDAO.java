@@ -2,6 +2,7 @@ package siw.persistence.dao;
 
 import java.util.Map;
 
+import siw.model.AnchestorEventCategory;
 import siw.model.EventCategory;
 
 public interface EventCategoryDAO {
@@ -12,7 +13,7 @@ public interface EventCategoryDAO {
 
     public EventCategory findByName(String name);
 
-    public Map<Integer, EventCategory> findChildren(Integer id);
+    public Map<Integer, AnchestorEventCategory> showCategory();
 
     public boolean update(EventCategory modelobject);
 

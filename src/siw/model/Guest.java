@@ -1,16 +1,16 @@
 package siw.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Guest {
     private int id;
-    private String name;
-    private String image;
-
+    private String nameguest;
+    private String photo;
     private Map<Integer, Event> events;
 
     public Guest() {
-	// TODO Auto-generated constructor stub
+    	this.events= new HashMap<Integer, Event>();
     }
 
     public int getId() {
@@ -22,19 +22,19 @@ public class Guest {
     }
 
     public String getName() {
-	return name;
+	return nameguest;
     }
 
     public void setName(String name) {
-	this.name = name;
+	this.nameguest = name;
     }
 
     public String getImage() {
-	return image;
+	return photo;
     }
 
     public void setImage(String image) {
-	this.image = image;
+	this.photo = image;
     }
 
     public Map<Integer, Event> getEvents() {

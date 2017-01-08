@@ -15,4 +15,6 @@ public interface TicketCategoryDAO
 	public Map<Integer,TicketCategory> findById(Long id);
 	
 	public Map<Integer,TicketCategory> findByName(String name);
+	
+	public Map<Integer,TicketCategory> showCategory();
 }

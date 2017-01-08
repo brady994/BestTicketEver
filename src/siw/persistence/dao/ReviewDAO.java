@@ -8,11 +8,7 @@ import siw.model.User;
 
 public interface ReviewDAO 
 {
-<<<<<<< HEAD
 	public Integer create(Review modelObject);
-=======
-	public void create(Review modelObject);
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
 	
 	public void delete(Review r);
 	
@@ -27,6 +23,8 @@ public interface ReviewDAO
 	public Map<Integer,Review> findByEvent(Event name);
 	
 	public Map<Integer,Review> findByFeedback(Long feedback);
+
+	public int getAVGbyEvent(Integer id);
 	
 	
 }

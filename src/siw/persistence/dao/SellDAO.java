@@ -16,32 +16,4 @@ public interface SellDAO {
 
     public void update(Sell s);
 
-    public Integer findLastId(Order o);
-
-    public Sell findById(Long Id);
-
-    public Map<Integer, Sell> findByUser(User u);
-
-    public Map<Integer, Sell> findByUser(User u, Integer offset, Integer limit);
-
-    public Map<Integer, Sell> findByTicket(Ticket t);
-
-    public Map<Integer, Sell> findByTicket(Ticket t, Integer offset, Integer limit);
-
-    public Map<Integer, Sell> findByDate(Date d);
-
-    public Map<Integer, Sell> findByDate(Date d, Integer offset, Integer limit);
-
-    public Map<Integer, Sell> findByPrice(float price);
-
-    public Map<Integer, Sell> findByPrice(float price, Integer offset, Integer limit);
-
-    public Map<Integer, Sell> findByOrder(Order o);
-
-    public Map<Integer, Sell> findByOrder(Order o, Integer offset, Integer limit);
-
-    public Map<Integer, Sell> findByGift(Gift g);
-
-    public Map<Integer, Sell> findByGift(Gift g, Integer offset, Integer limit);
-
 }

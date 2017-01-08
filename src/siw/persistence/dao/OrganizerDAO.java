@@ -13,9 +13,7 @@ public interface OrganizerDAO
 	
 	public void update(Organizer o);
 	
-	public Map<Integer,Organizer> setEvents(Event e);
-	
-	public Map<Integer,Organizer> getEvents(Event e);
+	public Map<Integer,Event> getEvents(Organizer o);
 	
 	
 }

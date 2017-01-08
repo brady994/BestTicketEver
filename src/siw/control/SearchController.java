@@ -2,15 +2,25 @@ package siw.control;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import siw.model.Event;
+import siw.model.EventCategory;
 import siw.service.SearchService;
 
 /**
@@ -18,113 +28,87 @@ import siw.service.SearchService;
  */
 @WebServlet("/SearchController")
 public class SearchController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SearchController() {
-	super();
-	// TODO Auto-generated constructor stub
-    }
-
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	    throws ServletException, IOException {
-	// TODO Auto-generated method stub
-
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	    throws ServletException, IOException {
-	// TODO Auto-generated method stub
-
-	BufferedReader br = new BufferedReader(request.getReader());
-	String json = "";
-	if (br != null) {
-	    json = br.readLine();
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SearchController() {
+		super();
 	}
 
-	response.setContentType("text/html");
-	String action = request.getParameter("action");
-	JsonObject result = new JsonObject();
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	switch (action) 
-	{
-		case "searchById":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventById(action,result);
-		    break;
-		}
-		case "searchByGuest":
-		{   
-			SearchService searchService = new SearchService();
-			searchService.getEventbyfindGuest(action,result);
-			break;
-		}
-		case "searchByticket":
-		{
-			SearchService searchService = new SearchService();
-			searchService.geEventfindTicket(action,result);  
-			break;	
-		}
-		case "searchByLastid":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventfindLastId(action,result);
-			break;
-		}
-		case "findByName":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventFindByName(action, result);
-			break;
-		}
-		case "findByDate":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventFindByDate(action, result);
-			break;
-		}
-		case "findByPrice":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventFindByPrice(action, result);
-			break;
-		}
-		case "findByLocation":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventFindByLocation(action ,result);  
-			break;
-		}
-		case "findByGuest":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventFindByGuest(action,result);
-			break;
-		}
-		case "findByCategory":
-		{
-			SearchService searchService = new SearchService();
-			searchService.getEventFindByCategory(action,result);  
-			break;
-		}
-		default:
-		    break;
 	}
-	response.getWriter().append("Served at: ").append(request.getContextPath());
-    }
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		BufferedReader br = new BufferedReader(request.getReader());
+		String json = null;
+		JsonObject result = new JsonObject();
+		if (br != null) {
+			json = br.readLine();
+		}
+		String action = request.getParameter("action");
+		Map<Integer, Event> resultSearch = new HashMap<Integer, Event>();
+
+		if (action != null) {
+			SearchService searchservice = new SearchService();
+			resultSearch = searchservice.getEventFindByCategory(json, result);
+
+		} else {
+
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(json);
+
+			JsonObject object = element.getAsJsonObject();
+			String filter = object.get("filter").getAsString();
+
+			SearchService searchServices = new SearchService();
+			if (filter.equals("")) {
+
+				resultSearch = searchServices.getEventFindByName(json, result);
+			} else {
+				switch (filter) {
+				case "Date": {
+					SearchService searchService = new SearchService();
+					resultSearch = searchService.getEventFindByDate(json, result);
+					break;
+				}
+				case "Price": {
+					SearchService searchService = new SearchService();
+					resultSearch = searchService.getEventFindByPrice(json, result);
+					break;
+				}
+				case "Artist": {
+					SearchService searchService = new SearchService();
+					resultSearch = searchService.getEventFindByGuest(json, result);
+					break;
+				}
+				case "Place": {
+					SearchService searchService = new SearchService();
+					resultSearch = searchService.getEventFindByLocation(json, result);
+					break;
+				}
+				default:
+					break;
+
+				}
+			}
+		}
+		session.setAttribute("event", resultSearch);
+		response.getWriter().write(result.toString());
+	}
 }
-

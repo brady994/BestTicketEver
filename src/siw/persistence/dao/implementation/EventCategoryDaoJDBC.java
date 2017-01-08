@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import siw.model.AnchestorEventCategory;
 import siw.model.EventCategory;
 import siw.persistence.DAOUtility;
 import siw.persistence.dao.EventCategoryDAO;
@@ -38,7 +40,6 @@ public class EventCategoryDaoJDBC implements EventCategoryDAO {
 	    return (statement.executeUpdate() > 0);
 
 	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    DAOUtility.close(connection);
@@ -132,11 +133,6 @@ public class EventCategoryDaoJDBC implements EventCategoryDAO {
     	
     
 
-    @Override
-    public Map<Integer, EventCategory> findChildren(Integer id) {
-	// TODO Auto-generated method stub
-	return null;
-    }
 
     @Override
     public boolean update(EventCategory modelobject) {
@@ -202,6 +198,40 @@ public class EventCategoryDaoJDBC implements EventCategoryDAO {
 	return true;
 
     }
+
+	@Override
+	public Map<Integer, AnchestorEventCategory> showCategory() {
+		Map<Integer, AnchestorEventCategory> category = new HashMap<Integer, AnchestorEventCategory>();
+		PreparedStatement statement = null;
+		ResultSet result = null;
+		Connection connection = null;
+		String query = "";
+		try {
+			connection = datasource.getConnection();
+			query += "select ac.idanchestor,ac.name as nameanchestor,ec.ideventcategory,ec.name from anchestorcategory as ac, eventcategory as ec where ac.idanchestor=ec.anchestorcategory_id";
+			statement = connection.prepareStatement(query);
+			result = statement.executeQuery();
+			while (result.next()) {
+				AnchestorEventCategory anchestor = new AnchestorEventCategory();
+				anchestor.setId(result.getInt("idanchestor"));
+				anchestor.setName(result.getString("nameanchestor"));
+				EventCategory child = new EventCategory();
+				child.setId(result.getInt("ideventcategory"));
+				child.setName(result.getString("name"));
+				anchestor.getChildren().put(child.getId(), child);
+				if (!category.containsKey(anchestor.getId())) {
+					category.put(anchestor.getId(), anchestor);
+				} else {
+					category.get(anchestor.getId()).getChildren().put(child.getId(), child);
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return category;
+	}
 
 
 
