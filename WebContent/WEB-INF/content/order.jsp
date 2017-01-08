@@ -25,7 +25,7 @@
 						<div class="col col-xs-6 text-right">
 							<button type="button" class="btn btn-info collapsed"
 								data-toggle="collapse" data-target="#${entry.key }">
-								<i class="glyphicon glyphicon-chevron-down"></i> Show Items
+								<i class="glyphicon glyphicon-chevron-down hidden-xs"></i> Show Items
 							</button>
 						</div>
 					</div>

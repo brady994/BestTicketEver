@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -45,6 +44,7 @@
                                         <th>
                                             Event
                                         </th>
+                                        <th></th>
                                         <th>
                                             Quantity
                                         </th>
@@ -58,219 +58,97 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <c:forEach items="${cart.tickets}" var="entry">
                                         <tr>
                                             <div class="row">
-                                                <td class="col-md-6" id="${entry.key}">
+                                                <td class="col col-md-6 col-xs-8" id="${entry.key}">
                                                     <div class="media">
-                                                        <div class="media-left">
-                                                            <img class="media-object img-responsive" src="${entry.value.event.image}" alt="${entry.value.event.name}"/> </div> <div class="media-body"> <a href="#"> <h4 class="media-heading">${entry.value.event.name}</h4> </a> </div> </div> </td> <td class=" col-md-2 ">
-                                                                <select name="quantity" class="form-control input-sm">
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">3</option>
-                                                                    <option value="4">4</option>
-                                                                    <option value="5">5</option>
-                                                                </select>
-                                                            </td>
-
-                                                            <td class="col-md-2">
-                                                                ${entry.value.price}
-                                                            </td>
-
-                                                            <td class="col-md-2">
-                                                                <strong>${entry.value.price}</strong>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-warning rm-item">
-                                                                    <span class="glyphicon glyphicon-remove pull-left"></span>
-                                                                    Remove
-                                                                </button>
-                                                            </td>
-
+                                                        <div class="media-left col col-md-6 col-xs-8">
+                                                            <img class="media-object img-responsive" src="${entry.value.event.image}" alt="${entry.value.event.name}"/>
                                                         </div>
-                                                    </tr>
-                                                </c:forEach>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
+                                                        <div class="media-body col col-md-6 col-xs-4">
+                                                            <a href="#">
+                                                                <h4 class="media-heading">${entry.value.event.name}
+                                                                </h4>
+                                                            </a>
+                                                            <dl>
+                                                                <dt>
+                                                                    Date</dt>
+                                                                <dd>${entry.value.event.date}</dd>
+                                                                <dt>Location</dt>
+                                                                <dd>${entry.value.event.location}</dd>
 
-                                                        <a href="home?action=index" role="button" class=" btn btn-info">
-                                                            <i class="fa fa-angle-left"></i>
-                                                            Continue
-                                                        </a>
+                                                            </dl>
+                                                        </div>
 
-                                                    </td>
-                                                    <td>
-                                                        <strong>Total:
-                                                            <span id="total">${cart.total}</span>$</strong>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success">
-                                                            Checkout
-                                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </tbody>
+                                                    </div>
+                                                </td>
+                                                <td class=" col col-md-2 col-xs-6">
+                                                    <dl>
+                                                        <dt>Ticket Category</dt>
+                                                        <dd>${entry.value.category.name}</dd>
 
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                                                    </dl>
+                                                </td>
+                                                <td class="col col-md-2 col-xs-4">
+                                                    <select name="quantity" class="form-control input-sm">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </td>
 
-            <div class="push"></div>
-=======
-<div class="container">
-    <div class="panel panel-default panel-table">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col col-xs-6">
-              <h1 class="panel-title panel-title-cart"> Event in your cart
-              </h1>
-            </div>
-            <div class="col col-xs-6 text-right">
-              <button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-trash"></span>
-                Remove All
-              </button>
-            </div>
+                                                <td class="col col-md-1 col-xs-4">
+                                                    ${entry.value.price}
+                                                </td>
 
-        </div>
-      </div>
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-cart">
-                    <thead>
-                        <tr>
-                            <th>
-                                Event
-                            </th>
-                            <th>
-                                Quantity
-                            </th>
-                            <th>
-                                Price
-                            </th>
-                            <th>
-                                Total
-                            </th>
-                            <th>
+                                                <td class="col col-md-1 col-xs-4">
+                                                    <strong>${entry.value.price}</strong>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning rm-item">
+                                                        <span class="glyphicon glyphicon-remove pull-left"></span>
+                                                        Remove
+                                                    </button>
+                                                </td>
 
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <div class="row">
-                                <td class="col-md-6">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img class="media-object" src="Img/event.jpg" alt="event" />
-                                        </div>
-                                        <div class="media-body">
-                                            <a href="#"><h4 class="media-heading">Event name</h4></a>
-                                        </div>
-                                    </div>
-                                </td>
+                                            </div>
+                                        </tr>
+                                    </c:forEach>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
 
-                                <td class=" col-md-2 ">
-                                    <select class="form-control input-sm" name="">
-                                        <option value="option">1</option>
-                                        <option value="option">2</option>
-                                    </select>
-                                </td>
+                                            <a href="home?action=index" role="button" class=" btn btn-info">
+                                                <i class="fa fa-angle-left"></i>
+                                                Continue
+                                            </a>
 
-
-                                <td class="col-md-2">
-                                    20$
-                                </td>
-
-                                <td class="col-md-2">
-                                    <strong>20$</strong>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-remove pull-left"> </span> Remove
-                                    </button>
-                                </td>
-
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-
-
-                                <td class="col-md-6">
-
-
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img class="media-object " src="Img/event.jpg" alt="event" />
-                                        </div>
-                                        <div class="media-body">
-                                            <a href="#"><h4 class="media-heading">Event name</h4></a>
-                                        </div>
-                                        <div class="row">
-                                            <td class="col-md-2 ">
-                                                <select class="form-control input-sm" name="">
-                                                    <option value="option">1</option>
-                                                    <option value="option">2</option>
-                                                </select>
-                                            </td>
-                                        </div>
-                                        <td class="col-md-2">
-                                            20$
                                         </td>
-                                        <td class="col-md-2">
-                                            <strong>20$</strong>
+                                        <td>
+                                            <strong>
+                                                <span id="total">${cart.total}</span>$</strong>
                                         </td>
-                                        <td class="col-md-8">
-                                            <button type="button" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-remove pull-left"> </span> Remove
+                                        <td>
+                                            <button type="submit" class="btn btn-success">
+                                                Checkout
+                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
                                             </button>
                                         </td>
-                                    </div>
-                                </td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
+                        </tbody>
 
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-info">
-                                    <i class="fa fa-angle-left" aria-hidden="true"></i> Continue
-                                </button>
-
-                            </td>
-                            <td>
-                                <strong>Total: 40$</strong>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success">
-                                    Checkout <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
-<div class="push">
-
-</div>
->>>>>>> branch 'master' of https://github.com/brady994/TicketsBest.git
+<div class="push"></div>

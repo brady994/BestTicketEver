@@ -23,14 +23,15 @@
 							</h2>
 						</div>
 						<div class="col col-xs-6 text-right">
+							<a role="button" data-target="${entry.key}" class="delete-wish btn btn-danger"> <i class="fa fa-trash-o"></i></a>
 							<button type="button" class="btn btn-info collapsed"
-								data-toggle="collapse" data-target="#${entry.key }">
-								<i class="hidden-xs glyphicon glyphicon-chevron-down"></i> Show Events
+								data-toggle="collapse" data-target="#${entry.key}">
+								<i class="hidden-xs glyphicon glyphicon-chevron-down"></i> Show Tickets
 							</button>
 						</div>
 					</div>
 				</div>
-				<div class="panel-collapse collapse" id="${entry.key }">
+				<div class="panel-collapse collapse" id="${entry.key}">
 					<div class="panel-body">
 						<div class="table-container table-responsive">
 							<table class="table">
